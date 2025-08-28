@@ -20,9 +20,8 @@ docker cp ../app-export/codegen-dashboard.zip budibase:/app-import/
 
 echo "App export file copied successfully."
 echo "Now you can import the app through the Budibase UI:"
-echo "1. Log in to Budibase at http://localhost:10000"
+echo "1. Log in to Budibase at http://localhost:3000"
 echo "2. Click on 'Create new app'"
 echo "3. Select 'Import app'"
 echo "4. Select the 'codegen-dashboard.zip' file"
 echo "5. Click 'Import'"
-

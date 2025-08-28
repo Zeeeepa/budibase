@@ -25,7 +25,7 @@ A production-ready Budibase dashboard for monitoring and managing Codegen API re
 2. Navigate to the `codegen-dashboard/docker` directory
 3. Copy `.env.example` to `.env` and update the values
 4. Run `docker-compose up -d`
-5. Access the dashboard at `http://localhost:10000`
+5. Access the dashboard at `http://localhost:3000`
 6. Import the application from `app-export/codegen-dashboard.zip`
 
 ## Configuration
@@ -41,7 +41,7 @@ A production-ready Budibase dashboard for monitoring and managing Codegen API re
 
 After starting the Budibase container, follow these steps to import the Codegen Dashboard:
 
-1. Log in to Budibase at `http://localhost:10000`
+1. Log in to Budibase at `http://localhost:3000`
 2. Click on "Create new app"
 3. Select "Import app"
 4. Upload the `app-export/codegen-dashboard.zip` file
@@ -75,4 +75,3 @@ If you encounter any issues, check the following:
 ## License
 
 This project is licensed under the same license as Budibase.
-

@@ -45,7 +45,7 @@ CODEGEN_ORG_ID=your_organization_id
 docker-compose up -d
 ```
 
-This will start the Budibase container and make it available at `http://localhost:10000`.
+This will start the Budibase container and make it available at `http://localhost:3000`.
 
 ### 4. Import the Codegen Dashboard App
 
@@ -57,7 +57,7 @@ This will start the Budibase container and make it available at `http://localhos
 
 #### Option 2: Manual Import
 
-1. Log in to Budibase at `http://localhost:10000` using the credentials you set in the `.env` file
+1. Log in to Budibase at `http://localhost:3000` using the credentials you set in the `.env` file
 2. Click on "Create new app"
 3. Select "Import app"
 4. Upload the `app-export/codegen-dashboard.zip` file
@@ -132,7 +132,7 @@ If you encounter any issues not covered in this guide, please:
 
 ### Custom Port
 
-To use a custom port instead of the default 10000, edit the `docker-compose.yml` file and change the port mapping:
+To use a custom port instead of the default 3000, edit the `docker-compose.yml` file and change the port mapping:
 
 ```yaml
 ports:
@@ -152,7 +152,7 @@ server {
     ssl_certificate_key /path/to/your/private.key;
 
     location / {
-        proxy_pass http://localhost:10000;
+        proxy_pass http://localhost:3000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -169,4 +169,3 @@ The Docker Compose file is configured to use a Docker volume for persistent stor
 volumes:
   - /path/on/host:/data
 ```
-

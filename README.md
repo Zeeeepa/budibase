@@ -27,7 +27,7 @@ See the [Codegen Dashboard documentation](./codegen-dashboard/README.md) for det
 2. Navigate to the `codegen-dashboard/docker` directory
 3. Copy `.env.example` to `.env` and update the values
 4. Run `docker-compose up -d`
-5. Access the dashboard at `http://localhost:10000`
+5. Access the dashboard at `http://localhost:3000`
 6. Import the application from `app-export/codegen-dashboard.zip`
 
 ## Documentation
@@ -39,4 +39,3 @@ See the [Codegen Dashboard documentation](./codegen-dashboard/README.md) for det
 ## License
 
 This project is licensed under the same license as Budibase.
-
