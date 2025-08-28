@@ -1,0 +1,9 @@
+This is a placeholder for the Codegen Dashboard app export file.
+
+The actual app export file (codegen-dashboard.zip) should be created by:
+1. Building the app in Budibase according to the structure in app-structure.json
+2. Exporting the app from Budibase
+3. Placing the exported file in this directory
+
+Due to size limitations, the actual app export file is not included in the repository.
+

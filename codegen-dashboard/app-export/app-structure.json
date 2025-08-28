@@ -1,0 +1,343 @@
+{
+  "version": "1.0.0",
+  "name": "Codegen Dashboard",
+  "description": "A dashboard for monitoring and managing Codegen API resources",
+  "screens": [
+    {
+      "name": "Dashboard",
+      "route": "/",
+      "props": {
+        "title": "Codegen Dashboard",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Users",
+      "route": "/users",
+      "props": {
+        "title": "Users",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Agent Runs",
+      "route": "/agent-runs",
+      "props": {
+        "title": "Agent Runs",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Repositories",
+      "route": "/repositories",
+      "props": {
+        "title": "Repositories",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Pull Requests",
+      "route": "/pull-requests",
+      "props": {
+        "title": "Pull Requests",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Organizations",
+      "route": "/organizations",
+      "props": {
+        "title": "Organizations",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Sandbox Logs",
+      "route": "/sandbox-logs",
+      "props": {
+        "title": "Sandbox Logs",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Setup Commands",
+      "route": "/setup-commands",
+      "props": {
+        "title": "Setup Commands",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    },
+    {
+      "name": "Settings",
+      "route": "/settings",
+      "props": {
+        "title": "Settings",
+        "size": "L",
+        "layout": "div",
+        "showNavigation": true,
+        "navigation": "Tabs"
+      },
+      "component": "Screen"
+    }
+  ],
+  "datasources": [
+    {
+      "name": "Codegen API",
+      "type": "REST",
+      "config": {
+        "url": "https://api.codegen.com",
+        "defaultHeaders": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "authConfig": [
+          {
+            "name": "Codegen Auth",
+            "type": "Bearer Token",
+            "config": {
+              "token": "{{ state.codegenApiToken }}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "queries": [
+    {
+      "name": "GetUsers",
+      "datasourceId": "Codegen API",
+      "queryId": "users",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/organizations/{{ state.organizationId }}/users",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "GetUser",
+      "datasourceId": "Codegen API",
+      "queryId": "user",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/organizations/{{ state.organizationId }}/users/{{ state.userId }}",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "GetCurrentUserInfo",
+      "datasourceId": "Codegen API",
+      "queryId": "current-user-info",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/current-user-info",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "CreateAgentRun",
+      "datasourceId": "Codegen API",
+      "queryId": "create-agent-run",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/agent-run",
+        "authConfigId": "Codegen Auth",
+        "body": {
+          "organization_id": "{{ state.organizationId }}",
+          "repository_id": "{{ state.repositoryId }}",
+          "message": "{{ state.message }}",
+          "trigger_type": "{{ state.triggerType }}"
+        }
+      }
+    },
+    {
+      "name": "GetAgentRun",
+      "datasourceId": "Codegen API",
+      "queryId": "get-agent-run",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/agent-run/{{ state.runId }}",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "ListAgentRuns",
+      "datasourceId": "Codegen API",
+      "queryId": "list-agent-runs",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/agent-runs",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "ResumeAgentRun",
+      "datasourceId": "Codegen API",
+      "queryId": "resume-agent-run",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/agent-run/{{ state.runId }}/resume",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "BanAllChecksForAgentRun",
+      "datasourceId": "Codegen API",
+      "queryId": "ban-all-checks",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/agent-run/{{ state.runId }}/ban-all-checks",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "UnbanAllChecksForAgentRun",
+      "datasourceId": "Codegen API",
+      "queryId": "unban-all-checks",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/agent-run/{{ state.runId }}/unban-all-checks",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "RemoveCodegenFromPR",
+      "datasourceId": "Codegen API",
+      "queryId": "remove-from-pr",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/agent-run/{{ state.runId }}/remove-from-pr",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "GetRepositories",
+      "datasourceId": "Codegen API",
+      "queryId": "repositories",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/repositories",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "EditPullRequestSimple",
+      "datasourceId": "Codegen API",
+      "queryId": "edit-pr-simple",
+      "parameters": {
+        "method": "PUT",
+        "url": "/v1/pull-request/{{ state.prId }}/simple",
+        "authConfigId": "Codegen Auth",
+        "body": {
+          "title": "{{ state.title }}",
+          "body": "{{ state.body }}"
+        }
+      }
+    },
+    {
+      "name": "EditPullRequest",
+      "datasourceId": "Codegen API",
+      "queryId": "edit-pr",
+      "parameters": {
+        "method": "PUT",
+        "url": "/v1/pull-request/{{ state.prId }}",
+        "authConfigId": "Codegen Auth",
+        "body": {
+          "title": "{{ state.title }}",
+          "body": "{{ state.body }}",
+          "state": "{{ state.prState }}"
+        }
+      }
+    },
+    {
+      "name": "GetOrganizationIntegrations",
+      "datasourceId": "Codegen API",
+      "queryId": "org-integrations",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/organizations/{{ state.organizationId }}/integrations",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "GenerateSetupCommands",
+      "datasourceId": "Codegen API",
+      "queryId": "setup-commands",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/setup-commands/generate",
+        "authConfigId": "Codegen Auth",
+        "body": {
+          "repository_id": "{{ state.repositoryId }}"
+        }
+      }
+    },
+    {
+      "name": "GetOrganizations",
+      "datasourceId": "Codegen API",
+      "queryId": "organizations",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/organizations",
+        "authConfigId": "Codegen Auth"
+      }
+    },
+    {
+      "name": "AnalyzeSandboxLogs",
+      "datasourceId": "Codegen API",
+      "queryId": "analyze-logs",
+      "parameters": {
+        "method": "POST",
+        "url": "/v1/sandbox/analyze-logs",
+        "authConfigId": "Codegen Auth",
+        "body": {
+          "logs": "{{ state.logs }}"
+        }
+      }
+    },
+    {
+      "name": "GetAgentRunLogs",
+      "datasourceId": "Codegen API",
+      "queryId": "agent-run-logs",
+      "parameters": {
+        "method": "GET",
+        "url": "/v1/agents-alpha/run/{{ state.runId }}/logs",
+        "authConfigId": "Codegen Auth"
+      }
+    }
+  ]
+}
+

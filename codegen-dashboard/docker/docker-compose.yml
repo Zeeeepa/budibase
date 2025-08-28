@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  budibase:
+    image: budibase/budibase:latest
+    restart: unless-stopped
+    ports:
+      - "10000:80"
+    volumes:
+      - budibase_data:/data
+      - ./app-import:/app-import
+    environment:
+      - SELF_HOSTED=1
+      - DISABLE_ACCOUNT_PORTAL=1
+      - BB_ADMIN_USER_EMAIL=${BB_ADMIN_USER_EMAIL:-admin@example.com}
+      - BB_ADMIN_USER_PASSWORD=${BB_ADMIN_USER_PASSWORD:-password}
+      - BUDIBASE_ENVIRONMENT=PRODUCTION
+      - PLUGINS_DIR=/plugins
+      - CODEGEN_API_TOKEN=${CODEGEN_API_TOKEN}
+      - CODEGEN_ORG_ID=${CODEGEN_ORG_ID}
+    healthcheck:
+      test: ["CMD", "/healthcheck.sh"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 45s
+
+volumes:
+  budibase_data:
+    driver: local
+
